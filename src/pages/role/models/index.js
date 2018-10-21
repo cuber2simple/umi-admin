@@ -7,6 +7,7 @@ import {
   serviceBatchDelete,
 } from '../services';
 import { message } from 'antd';
+import { isSuccess } from '../../../common/globalConstant';
 
 export default {
   namespace: 'roleToNamespace',
@@ -19,7 +20,7 @@ export default {
 
     * findPage({ payload }, { call, put }) {
       const response = yield call(serviceFindPage, payload);
-      if (response['is_success'] === true) {
+      if (response[isSuccess] === true) {
         yield put({
           type: 'refreshTable',
           payload: response.result,
@@ -31,7 +32,7 @@ export default {
 
     * findObject({ payload }, { call, put }) {
       const response = yield call(serviceFindObject, { id: payload });
-      if (response['is_success'] === true) {
+      if (response[isSuccess] === true) {
         yield put({
           type: 'refreshDefaultValue',
           payload: response.result,
@@ -43,7 +44,7 @@ export default {
 
     * add({ payload }, { call }) {
       const response = yield call(serviceAdd, payload);
-      if (response['is_success'] === true) {
+      if (response[isSuccess] === true) {
         message.success(response.result.msg);
         return 1;
       } else {
@@ -54,7 +55,7 @@ export default {
 
     * update({ payload }, { call }) {
       const response = yield call(serviceUpdate, payload);
-      if (response['is_success'] === true) {
+      if (response[isSuccess] === true) {
         message.success(response.result.msg);
         return 1;
       } else {
@@ -65,7 +66,7 @@ export default {
 
     * batchDelete({ payload }, { call }) {
       const response = yield call(serviceBatchDelete, { id_list: payload });
-      if (response['is_success'] === true) {
+      if (response[isSuccess] === true) {
         message.success(response.result.msg);
         return 1;
       } else {

@@ -1,7 +1,7 @@
 import { login } from '../services/index';
 import { message } from 'antd';
 import router from 'umi/router';
-import { platformToken } from '../../../common/globalConstant';
+import { isSuccess, platformToken } from '../../../common/globalConstant';
 
 export default {
   namespace: 'loginToNamespace',
@@ -10,11 +10,11 @@ export default {
   effects: {
     * platformLogin({ payload }, { call }) {
       const response = yield call(login, payload);
-      if (response && response.is_success === true) {
+      if (response && response[isSuccess] === true) {
         const token = response.result.token;
         sessionStorage.setItem(platformToken, token);
         router.push('/');
-      } else if (response && response.is_success === false) {
+      } else if (response && response[isSuccess] === false) {
         message.error(response.error_info.msg);
       }
     },

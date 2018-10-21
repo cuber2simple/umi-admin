@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import { Icon, message, Spin } from 'antd';
 import _ from 'lodash';
 import { connect } from 'dva';
-
 import avatar from './images/avatar.png';
-
 import styles from './css/styles.less';
+
+
+const modelPlatformLogin = 'loginToNamespace/platformLogin';
+
 
 @connect(({ loginToNamespace, loading }) => ({
   loginToNamespace,
-  submitLoading: loading.effects['loginToNamespace/platformLogin'],
+  submitLoading: loading.effects[modelPlatformLogin],
 }))
 class Index extends Component {
   constructor(props) {
@@ -35,7 +37,7 @@ class Index extends Component {
       message.error('密码不能为空!');
     } else {
       dispatch({
-        type: 'loginToNamespace/platformLogin',
+        type: modelPlatformLogin,
         payload: { username, password },
       });
     }

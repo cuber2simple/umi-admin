@@ -2,7 +2,7 @@ import axios from 'axios';
 import { message } from 'antd';
 import router from 'umi/router';
 import api from './api';
-import { platformToken } from '../common/globalConstant';
+import { isSuccess, platformToken } from '../common/globalConstant';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -46,7 +46,7 @@ axios.interceptors.request.use(config => {
 
 // 返回拦截器
 axios.interceptors.response.use(config => {
-  if (config.data && config.data.is_success === false && config.data.error_info.code === 401) {
+  if (config.data && config.data[isSuccess] === false && config.data.error_info.code === 401) {
     router.push('/login');
   }
   return config.data;
