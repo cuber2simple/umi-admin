@@ -1,4 +1,3 @@
-
 export default {
   config() {
     return {
@@ -8,4 +7,4 @@ export default {
       },
     };
   },
-}
+};

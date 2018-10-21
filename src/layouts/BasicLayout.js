@@ -47,7 +47,7 @@ class BasicLayout extends Component {
     const { dispatch } = this.props;
     dispatch({
       type: 'global/getMenu',
-    })
+    });
   }
 
 

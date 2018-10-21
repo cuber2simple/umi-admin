@@ -2,6 +2,7 @@
   font-family: Georgia, sans-serif;
   text-align: center;
 }
+
 .title {
   font-size: 2.5rem;
   font-weight: normal;
@@ -11,6 +12,7 @@
   color: white;
   margin: 0;
 }
+
 .trigger {
   font-size: 18px;
   line-height: 64px;
@@ -21,23 +23,27 @@
 
 .logo {
   height: 32px;
-  background: rgba(255,255,255,.2);
+  background: rgba(255, 255, 255, .2);
   margin: 16px;
   text-align: center;
 }
-.logo h2{
+
+.logo h2 {
   color: #f7f7f7;
 }
-.avatar{
+
+.avatar {
   cursor: pointer;
   background: #87d068;
   float: right;
   margin: 16px 16px 0 0;
 }
+
 .avatar i {
-  font-size: 20px!important;
+  font-size: 20px !important;
 }
-.footer{
+
+.footer {
   text-align: center;
   padding: 0;
 }

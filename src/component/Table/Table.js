@@ -28,7 +28,7 @@ export default class HehTable extends Component {
       onChange: this.onSelectChange,
     };
     return (
-      <LocaleProvider  locale={zhCN}>
+      <LocaleProvider locale={zhCN}>
         <Table
           style={{ background: '#FFF' }}
           size={size}

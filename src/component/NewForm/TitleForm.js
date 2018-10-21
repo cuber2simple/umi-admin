@@ -1,28 +1,32 @@
-import React, {Component} from 'react'
-import {Modal, Form, Button, Input} from 'antd';
+import React, { Component } from 'react';
+import { Modal, Form, Button, Input } from 'antd';
 import styles from './titleStyles.less';
 
 const FormItem = Form.Item;
 
 class ComponentName extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-	componentWillMount() {}
+  componentWillMount() {
+  }
 
-	componentDidMount() {}
+  componentDidMount() {
+  }
 
-	componentWillReceiveProps (){}
+  componentWillReceiveProps() {
+  }
 
-	componentWillUnmount(){}
+  componentWillUnmount() {
+  }
 
   submit = () => {
   };
 
-	render() {
-    const {visible, onCancel, options, form} = this.props;
+  render() {
+    const { visible, onCancel, options, form } = this.props;
     const formItemLayout = {
       labelCol: { span: 6 },
       wrapperCol: { span: 18 },
@@ -44,38 +48,38 @@ class ComponentName extends Component {
       >
         <Form>
           {
-            options && options.map((item,index) => {
+            options && options.map((item, index) => {
               const key = index;
               return (
                 <div key={key}>
                   <h2 className={styles.title}>{item.title}</h2>
                   {
                     item.option.map(data => {
-                      return(
+                      return (
                         data.type === 'input' ?
                           <FormItem
                             {...formItemLayout}
                             key={data.key}
-                            style={{display:'inline-block', width: '49%'}}
+                            style={{ display: 'inline-block', width: '49%' }}
                             label={data.name}
                           >
                             {form.getFieldDecorator(data.id)(
-                              <Input />
+                              <Input/>,
                             )}
                           </FormItem>
-                        : data.type === 'select' ?
+                          : data.type === 'select' ?
                           <FormItem
                             {...formItemLayout}
                             key={data.key}
-                            style={{display:'inline-block', width: '49%'}}
+                            style={{ display: 'inline-block', width: '49%' }}
                             label={data.name}
                           >
                             {form.getFieldDecorator(data.id)(
-                              <Input />
+                              <Input/>,
                             )}
                           </FormItem>
-                        : ''
-                      )
+                          : ''
+                      );
                     })
                   }
                 </div>
@@ -85,8 +89,8 @@ class ComponentName extends Component {
         </Form>
       </Modal>
     );
-	}
+  }
 }
 
 const TitleForm = Form.create()(ComponentName);
-export default TitleForm
+export default TitleForm;

@@ -2,29 +2,29 @@ import { delay } from 'roadhog-api-doc';
 import loginErrorInfo from './util/loginErrorInfo';
 
 const jsonData = {
-  "result": [
+  'result': [
     {
-      "name": "首页",
-      "path": "/",
-      "icon": "home",
-      "children": null
+      'name': '首页',
+      'path': '/',
+      'icon': 'home',
+      'children': null,
     },
     {
-      "name": "角色管理",
-      "path": null,
-      "icon": "star",
-      "children": [
+      'name': '角色管理',
+      'path': null,
+      'icon': 'star',
+      'children': [
         {
-          "name": "角色列表",
-          "path": "/role",
-          "icon": null,
-          "children": null
-        }
-      ]
-    }
+          'name': '角色列表',
+          'path': '/role',
+          'icon': null,
+          'children': null,
+        },
+      ],
+    },
   ],
-  "error_info": null,
-  "is_success": true
+  'error_info': null,
+  'is_success': true,
 };
 
 const Api = {

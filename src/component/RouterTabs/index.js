@@ -46,16 +46,16 @@ class RouterTabs extends Component {
     }
     getMenu(res => {
       const newObj = {};
-      if(res && res.length !== 0){
+      if (res && res.length !== 0) {
         res.forEach(item => {
-          if(item.children){
-            item.children.forEach(child =>{
+          if (item.children) {
+            item.children.forEach(child => {
               newObj[child.path] = { name: child.name };
-            })
-          }else {
+            });
+          } else {
             newObj[item.path] = { name: item.name };
           }
-        })
+        });
       }
       this.setState({ routerConfig: newObj });
     });
@@ -104,7 +104,7 @@ class RouterTabs extends Component {
 
   componentWillUnmount() {
     this.didUnMounted = true;
-    this.setState = (state,callback)=>{
+    this.setState = (state, callback) => {
       return;
     };
     if (this.unListen) {
@@ -155,7 +155,7 @@ class RouterTabs extends Component {
   handleClickTag = (tag, e) => {
     this.props.dispatch({
       type: 'global/onPathChang',
-      payload:tag
+      payload: tag,
     });
     if (e && e.target.tagName.toLowerCase() === 'i') {
       return;
@@ -206,7 +206,7 @@ class RouterTabs extends Component {
     const cls = classNames(styles['router-tabs'], className);
     const tags = refsTag.map((pathname, index) => {
       const routeInfo = this.getTitleByPathname(pathname); // 这里假设每个pathname都能获取到指定到页面名称
-      if(routeInfo.name !== '暂无标签'){
+      if (routeInfo.name !== '暂无标签') {
         let title = routeInfo ? routeInfo.name : '404';
         const isLongTag = title.length > 30;
         const tagElem = (
@@ -283,4 +283,4 @@ class RouterTabs extends Component {
     );
   }
 };
-export default RouterTabs
+export default RouterTabs;

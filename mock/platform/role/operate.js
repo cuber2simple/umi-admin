@@ -3,13 +3,13 @@ import loginErrorInfo from '../util/loginErrorInfo';
 
 
 const jsonData = {
-  "result": {
-    "msg": "操作成功",
-    "date": 1536768054052,
-    "code": 200
+  'result': {
+    'msg': '操作成功',
+    'date': 1536768054052,
+    'code': 200,
   },
-  "error_info": null,
-  "is_success": true
+  'error_info': null,
+  'is_success': true,
 };
 
 const Api = {
@@ -62,6 +62,6 @@ const Api = {
 
   },
 };
-export default delay(Api,500)
+export default delay(Api, 500);
 
 

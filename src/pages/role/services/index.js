@@ -16,7 +16,7 @@ export async function serviceUpdate(params) {
   return request.post(request.api.platformRoleUpdate, params);
 }
 
-export async function serviceBatchDelete (params) {
+export async function serviceBatchDelete(params) {
   return request.post(request.api.platformRoleBatchDelete, params);
 }
 
