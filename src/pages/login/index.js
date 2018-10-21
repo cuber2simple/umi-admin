@@ -27,7 +27,7 @@ class Index extends Component {
   }
 
 
-  onSubmit = () => {
+  eventSubmit = () => {
     const username = _.trim(this.refs.username.value);
     const password = _.trim(this.refs.password.value);
     const { dispatch } = this.props;
@@ -64,7 +64,7 @@ class Index extends Component {
         </form>
         <div className={styles['signin']}>
           <Spin indicator={antIcon} spinning={submitLoading === true}>
-            <input onClick={this.onSubmit} type="submit" value={submitLoading === true ? '正在登陆...' : '登陆'}/>
+            <input onClick={this.eventSubmit} type="submit" value={submitLoading === true ? '正在登陆...' : '登陆'}/>
           </Spin>
         </div>
       </div>
