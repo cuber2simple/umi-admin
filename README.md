@@ -21,7 +21,7 @@
 ## 教程文章首发地址
 
 - 博客：<http://sayshy.com>
-- 项目下：<>
+- 项目下：<https://github.com/satan31415/umi-admin/tree/master/tutorial/2018>
 
 ## 《最适合后端的 React Admin》特别章节：开篇
 
