@@ -85,11 +85,10 @@ class ComponentName extends Component {
   };
   render() {
     const {onSubmit} = this;
-    const {title,form,visible,onCancel,options,defaultValue,disabled,loading} = this.props;
+    const {title,form,visible,onCancel,options,defaultValue,disabled,detailLoading,submitLoading} = this.props;
     const onPreview = (file) => {
       // window.open(api.target + api.imageShow + file.response.images[0].uri);
     };
-    console.log(disabled);
     return (
       <Modal
         afterClose={this.clear}
@@ -101,10 +100,10 @@ class ComponentName extends Component {
         footer={[
           <Button key='1' onClick={onCancel} type="default">取消</Button>,
           !disabled ?
-          <Button key='2' onClick={onSubmit} type="primary">确定</Button> : null
+          <Button loading={submitLoading} key='2' onClick={onSubmit} type="primary">确定</Button> : null
         ]}
       >
-        <Spin spinning={loading}>
+        <Spin spinning={detailLoading}>
           <Form layout="vertical">
             {
               options && options.map((item) => {

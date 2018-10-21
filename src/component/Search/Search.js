@@ -1,7 +1,7 @@
-import React,{Component} from 'react';
-import {Row, Col, Form, Select, Button, DatePicker} from 'antd';
+import React, { Component } from 'react';
+import { Row, Col, Form, Select, Button, DatePicker } from 'antd';
 import { ItemInput, ItemSelect } from '../../component/FormItemComponent';
-import moment from 'moment'
+import moment from 'moment';
 import 'moment/locale/zh-cn';
 import styles from './search.less';
 
@@ -9,7 +9,7 @@ const FormItem = Form.Item;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-class HehTable extends Component{
+class HehTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,8 +20,8 @@ class HehTable extends Component{
 
   submit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields((err,values)=>{
-      if(!err) {
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
         const options = this.props.options;
 
         options && options.forEach(item => {
@@ -44,15 +44,15 @@ class HehTable extends Component{
           }
         });
         for (let i in values) {
-          if(values.hasOwnProperty(i)){
-              if(values[i] === undefined || values[i] === 'created'){
-                  delete values[i];
-              }
+          if (values.hasOwnProperty(i)) {
+            if (values[i] === undefined || values[i] === 'created') {
+              delete values[i];
+            }
           }
         }
         this.props.getSearchValue(values);
       }
-    })
+    });
   };
   reset = () => {
     this.props.form.resetFields();
@@ -62,14 +62,14 @@ class HehTable extends Component{
     this.setState({ expand: !this.state.expand });
   };
 
-  hehInput = (layout, item, index,disabled,defaultValue) => {
+  hehInput = (layout, item, index, disabled, defaultValue) => {
     const width = document.body.clientWidth;
     const { form } = this.props;
     const row = this.props.row === 3;
     const showLength = row ? 3 : 4;
     return (
       <Col
-        span={width<=768 ? 24 : row ? 8 : 6}
+        span={width <= 768 ? 24 : row ? 8 : 6}
         key={item.key}
         style={{ display: index + 1 > showLength && this.state.expand !== true ? 'none' : 'block' }}
       >
@@ -84,14 +84,14 @@ class HehTable extends Component{
       </Col>
     );
   };
-  hehSelect = (layout, item, index,disabled,defaultValue) => {
+  hehSelect = (layout, item, index, disabled, defaultValue) => {
     const width = document.body.clientWidth;
     const { getFieldDecorator } = this.props.form;
     const row = this.props.row === 3;
     const showLength = row ? 3 : 4;
     return (
       <Col
-        span={width<=768 ? 24 : row ? 8 : 6}
+        span={width <= 768 ? 24 : row ? 8 : 6}
         key={item.key}
         style={{ display: index + 1 > showLength && this.state.expand !== true ? 'none' : 'block' }}
       >
@@ -102,7 +102,7 @@ class HehTable extends Component{
           layout={layout}
           form={this.props.form}
           disabled={disabled}
-          rule={{required:false}}
+          rule={{ required: false }}
           defaultValue={defaultValue}
         />
       </Col>
@@ -113,9 +113,9 @@ class HehTable extends Component{
     const { getFieldDecorator } = this.props.form;
     const row = this.props.row === 3;
     const showLength = row ? 3 : 4;
-    return(
+    return (
       <Col
-        span={width<=768 ? 24 : row ? 8 : 6}
+        span={width <= 768 ? 24 : row ? 8 : 6}
         key={item.key}
         style={{ display: index + 1 > showLength && this.state.expand !== true ? 'none' : 'block' }}
       >
@@ -125,21 +125,21 @@ class HehTable extends Component{
         >
           {
             getFieldDecorator(item.id)(
-              <DatePicker style={{width:'100%'}} />,
+              <DatePicker style={{ width: '100%' }}/>,
             )
           }
         </FormItem>
       </Col>
-    )
+    );
   };
   hehRangeData = (layout, item, index) => {
     const width = document.body.clientWidth;
     const { getFieldDecorator } = this.props.form;
     const row = this.props.row === 3;
     const showLength = row ? 3 : 4;
-    return(
+    return (
       <Col
-        span={width<=768 ? 24 : row ? 8 : 6}
+        span={width <= 768 ? 24 : row ? 8 : 6}
         key={item.key}
         style={{ display: index + 1 > showLength && this.state.expand !== true ? 'none' : 'block' }}
       >
@@ -149,16 +149,16 @@ class HehTable extends Component{
         >
           {
             getFieldDecorator(item.id)(
-              <RangePicker placeholder={['开始时间','结束时间']} style={{width:'100%'}} />,
+              <RangePicker placeholder={['开始时间', '结束时间']} style={{ width: '100%' }}/>,
             )
           }
         </FormItem>
       </Col>
-    )
+    );
   };
 
-  render(){
-    const { options,row } = this.props;
+  render() {
+    const { options, row, searchLoading } = this.props;
     const { expand } = this.state;
     const layout = {
       labelCol: { sm: { span: 10 }, xl: { span: 8 }, xxl: { span: 6 } },
@@ -170,32 +170,33 @@ class HehTable extends Component{
           {/*组件*/}
           <Row>
             {
-              options && options.map((item,index) => {
-                return(
+              options && options.map((item, index) => {
+                return (
                   item.type === 'input' ?
-                    this.hehInput(layout,item,index)
-                  : item.type === 'select' ?
-                    this.hehSelect(layout,item,index)
-                  : item.type === 'date' ?
-                    this.hehData(layout,item,index)
-                  : item.type === 'rangeDate' ?
-                    this.hehRangeData(layout,item,index)
-                  : ''
-                )
+                    this.hehInput(layout, item, index)
+                    : item.type === 'select' ?
+                    this.hehSelect(layout, item, index)
+                    : item.type === 'date' ?
+                      this.hehData(layout, item, index)
+                      : item.type === 'rangeDate' ?
+                        this.hehRangeData(layout, item, index)
+                        : ''
+                );
               })
             }
           </Row>
           {/*按钮组*/}
           <Row>
             <Col span={24} className={styles.btnGroup}>
-              <Button htmlType="submit" onClick={this.submit} type='primary' icon='search'>搜索</Button>
+              <Button loading={searchLoading} htmlType="submit" onClick={this.submit} type='primary'
+                      icon='search'>搜索</Button>
               <span> </span>
               <Button onClick={this.reset} icon='loading-3-quarters'>重置</Button>
               <span> </span>
               <Button
                 onClick={this.expand}
                 icon={!expand ? 'down' : 'up'}
-                style={{display:row === 3 && options.length > 3 ? 'inline-block' : row === 4 && options.length > 4 ? 'inline-block' : 'none'}}
+                style={{ display: row === 3 && options.length > 3 ? 'inline-block' : row === 4 && options.length > 4 ? 'inline-block' : 'none' }}
               >
                 {
                   !expand ? '展开所有' : '收起所有'

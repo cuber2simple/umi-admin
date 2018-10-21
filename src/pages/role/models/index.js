@@ -26,7 +26,6 @@ export default {
         });
       } else {
         message.error(response.error_info.msg);
-        console.log(response.error_info.msg);
       }
     },
 
@@ -39,7 +38,6 @@ export default {
         });
       } else {
         message.error(response.error_info.msg);
-        console.log(response.error_info.msg);
       }
     },
 
@@ -50,7 +48,6 @@ export default {
         return 1;
       } else {
         message.error(response.error_info.msg);
-        console.log(response.error_info.msg);
         return 2;
       }
     },
@@ -62,20 +59,17 @@ export default {
         return 1;
       } else {
         message.error(response.error_info.msg);
-        console.log(response.error_info.msg);
         return 2;
       }
     },
 
     * batchDelete({ payload }, { call }) {
       const response = yield call(serviceBatchDelete, { id_list: payload });
-      console.log(response);
       if (response['is_success'] === true) {
         message.success(response.result.msg);
         return 1;
       } else {
         message.error(response.error_info.msg);
-        console.log(response.error_info.msg);
         return 2;
       }
     },

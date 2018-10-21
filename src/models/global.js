@@ -2,18 +2,16 @@ import { getMenu } from '../common/menu';
 
 const pathKey = {};
 getMenu(res => {
-  if(res.length !== 0){
+  if (res && res.length !== 0) {
     res.forEach(item => {
-
-      if(item.children && item.children !== null){
-        console.log(item)
-        item.children.forEach(child =>{
-          pathKey[child.path] = {key:child.path , openKeys: item.name};
-        })
-      }else {
-        pathKey[item.path] = { key: item.path};
+      if (item.children && item.children !== null) {
+        item.children.forEach(child => {
+          pathKey[child.path] = { key: child.path, openKeys: item.name };
+        });
+      } else {
+        pathKey[item.path] = { key: item.path };
       }
-    })
+    });
   }
 });
 
@@ -29,36 +27,36 @@ export default {
   effects: {},
   reducers: {
     toggle(state, action) {
-      return{
+      return {
         ...state,
         collapsed: action.payload,
-      }
+      };
     },
-    onselect(state,action) {
-      return{
+    onselect(state, action) {
+      return {
         ...state,
         selectedKeys: action.payload,
-      }
+      };
     },
     onopen(state, action) {
-      return{
+      return {
         ...state,
         openKeys: action.payload,
-      }
+      };
     },
     onPathChang(state, action) {
-      if(!state.collapsed) {
+      if (!state.collapsed) {
         return {
           ...state,
-          openKeys: pathKey[action.payload].openKeys,
-          selectedKeys: pathKey[action.payload].key,
-        }
-      }else {
-        return{
+          openKeys: pathKey[action.payload] && pathKey[action.payload].openKeys,
+          selectedKeys: pathKey[action.payload] && pathKey[action.payload].key,
+        };
+      } else {
+        return {
           ...state,
-          openKeys:'',
-          selectedKeys: pathKey[action.payload].key,
-        }
+          openKeys: '',
+          selectedKeys: pathKey[action.payload] && pathKey[action.payload].key,
+        };
       }
     },
     resetAll(state) {

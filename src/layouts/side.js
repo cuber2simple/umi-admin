@@ -26,6 +26,13 @@ class Side extends Component {
       this.setState({ menu: res, loading: false });
     })
   }
+
+  componentWillUnmount() {
+    this.setState = (state,callback)=>{
+      return;
+    };
+  }
+
   render() {
     const { openKeys, selectedKeys } = this.props;
     const { menu, loading } = this.state;

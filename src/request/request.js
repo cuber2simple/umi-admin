@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {message} from 'antd';
+import { message } from 'antd';
 import router from 'umi/router';
 import api from './api';
 
@@ -20,26 +20,37 @@ const codeMessage = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
+
 // 全局默认配置
 axios.defaults.baseURL = api.target;
 axios.defaults.timeout = 10000;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8;Accept-Language:zh-CN,zh;q=0.8';
+
 // 请求body拦截器
 axios.interceptors.request.use(config => {
-  return config;
+  let newConfig = config;
+  newConfig = {
+    ...config,
+    headers: {
+      post: {
+        platform_token: sessionStorage.getItem('platform_token'),
+      },
+      get: {
+        platform_token: sessionStorage.getItem('platform_token'),
+      },
+    },
+  };
+  return newConfig;
 });
 
 // 返回拦截器
 axios.interceptors.response.use(config => {
-  if(config.status === 200 && config.data !== '/NO_TOKEN_BACK_LOGIN'){
-    return config.data;
-  }else{
-    message.error('用户登录信息过去，请重新登录');
-    router.push('/user/login');
-    return 'error'
+  if (config.data && config.data.is_success === false && config.data.error_info.code === 401) {
+    router.push('/login');
   }
-},(error)=>{
-  if(error && error.response){
+  return config.data;
+}, (error) => {
+  if (error && error.response) {
     switch (error.response.status) {
       case 500:
         router.push('/500');
@@ -54,37 +65,37 @@ axios.interceptors.response.use(config => {
         message.error(codeMessage[error.response.status]);
         break;
       default:
-        message.error('发生未知错误！！！')
+        message.error('发生未知错误！！！');
     }
-  }else if(JSON.stringify(error).indexOf('timeout') !== -1){
+  } else if (JSON.stringify(error).indexOf('timeout') !== -1) {
     message.error('连接超时,请刷新试试');
   }
 });
 
 
-const get = (url,parmas) => {
+const get = (url, parmas) => {
   return new Promise((resolve, reject) => {
-    axios.get(url,{
+    axios.get(url, {
       params: parmas,
     })
       .then(res => {
         resolve(res);
       })
       .catch(err => {
-        reject(err)
+        reject(err);
       });
   });
 };
-const post = (url,params) => {
+const post = (url, params) => {
   return new Promise((resolve, reject) => {
     axios.post(url, params)
       .then(res => {
-        if(res){
+        if (res) {
           resolve(res);
         }
       })
       .catch(err => {
-        reject(err)
+        reject(err);
       });
   });
 };

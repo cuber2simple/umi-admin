@@ -17,4 +17,8 @@ export default {
   platformRoleUpdate: '/platform/role/update',
   platformRoleBatchDelete: '/platform/role/batch-delete',
 
+
+  platformLogin: '/platform/login',
+  platformLogout: '/platform/logout',
+
 };

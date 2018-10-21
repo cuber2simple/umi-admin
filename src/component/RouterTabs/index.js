@@ -46,7 +46,7 @@ class RouterTabs extends Component {
     }
     getMenu(res => {
       const newObj = {};
-      if(res.length !== 0){
+      if(res && res.length !== 0){
         res.forEach(item => {
           if(item.children){
             item.children.forEach(child =>{
@@ -104,6 +104,9 @@ class RouterTabs extends Component {
 
   componentWillUnmount() {
     this.didUnMounted = true;
+    this.setState = (state,callback)=>{
+      return;
+    };
     if (this.unListen) {
       this.unListen();
       this.unListen = null;

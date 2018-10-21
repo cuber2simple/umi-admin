@@ -6,10 +6,22 @@ import Table from '../../component/Table';
 import { NewForm } from '../../component/NewForm';
 import Search from '../../component/Search';
 
+
+const modelFindPage = 'roleToNamespace/findPage';
+const modelFindObject = 'roleToNamespace/findObject';
+const modelUpdate = 'roleToNamespace/update';
+const modelAdd = 'roleToNamespace/add';
+const modelBatchDelete = 'roleToNamespace/batchDelete';
+const modelClearDefaultValue = 'roleToNamespace/clearDefaultValue';
+
+
 @connect(({ roleToNamespace, loading }) => ({
   roleToNamespace,
-  pageLoading: loading.effects['roleToNamespace/findPage'],
-  detailLoading: loading.effects['roleToNamespace/findObject'],
+  pageLoading: loading.effects[modelFindPage],
+  detailLoading: loading.effects[modelFindObject],
+  updateLoading: loading.effects[modelUpdate],
+  addLoading: loading.effects[modelAdd],
+  batchDeleteLoading: loading.effects[modelBatchDelete],
 }))
 class Index extends Component {
 
@@ -35,7 +47,7 @@ class Index extends Component {
 
   serviceFindPage = () => {
     this.props.dispatch({
-      type: 'roleToNamespace/findPage',
+      type: modelFindPage,
       payload: this.state.search,
     });
 
@@ -70,7 +82,7 @@ class Index extends Component {
   serviceFindObjectValue = (id) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'roleToNamespace/findObject',
+      type: modelFindObject,
       payload: id,
     });
     this.setState({ id: id, editStatus: true });
@@ -98,7 +110,7 @@ class Index extends Component {
   serviceBatchDelete = (id) => {
     const { dispatch } = this.props;
     dispatch({
-      type: 'roleToNamespace/batchDelete',
+      type: modelBatchDelete,
       payload: id ? [id] : this.state.selectedRowKeys,
     }).then(res => {
       if (res === 1) {
@@ -111,7 +123,7 @@ class Index extends Component {
     const { roleToNamespace: { defaultValue } } = this.props;
     if (defaultValue.id) {
       this.props.dispatch({
-        type: 'roleToNamespace/update',
+        type: modelUpdate,
         payload: { ...data, id: defaultValue.id },
       }).then(res => {
         if (res === 1) {
@@ -121,7 +133,7 @@ class Index extends Component {
       });
     } else {
       this.props.dispatch({
-        type: 'roleToNamespace/add',
+        type: modelAdd,
         payload: data,
       }).then(res => {
         if (res === 1) {
@@ -134,7 +146,7 @@ class Index extends Component {
 
   eventSubmitCancel = () => {
     this.props.dispatch({
-      type: 'roleToNamespace/clearDefaultValue',
+      type: modelClearDefaultValue,
     });
     this.setState({ visible: false, id: undefined, editStatus: false }, () => {
       this.setState({ disabled: undefined });
@@ -147,7 +159,8 @@ class Index extends Component {
 
   render() {
 
-    {/*===========================表格列属性值 start===========================*/}
+    {/*===========================表格列属性值 start===========================*/
+    }
     const columns = [
       { title: 'id', dataIndex: 'id' },
       { title: '角色名称', dataIndex: 'role_name' },
@@ -171,9 +184,10 @@ class Index extends Component {
         ),
       },
     ];
-    {/*===========================表格列属性值 end===========================*/}
+    {/*===========================表格列属性值 end===========================*/
+    }
 
-    const { roleToNamespace: { tableData, defaultValue }, pageLoading, detailLoading } = this.props;
+    const { roleToNamespace: { tableData, defaultValue }, pageLoading, detailLoading, updateLoading, addLoading, batchDeleteLoading } = this.props;
     const { editStatus } = this.state;
 
     return (
@@ -184,11 +198,17 @@ class Index extends Component {
           visible={this.state.visible}
           onCancel={this.eventSubmitCancel}
           onOk={this.eventSubmitOk}
-          loading={editStatus ? detailLoading : false}
+          detailLoading={editStatus ? detailLoading : false}
+          submitLoading={updateLoading || addLoading}
           defaultValue={defaultValue}
           disabled={this.state.disabled}
           options={[
-            { rule: { required: true }, name: '角色名称', id: 'role_name', type: 'input' },
+            {
+              rule: { required: true, whitespace: true, max: 10, min: 2 },
+              name: '角色名称',
+              id: 'role_name',
+              type: 'input',
+            },
             { rule: { required: false }, name: '角色描述', id: 'role_introduce', type: 'textarea' },
           ]}
         />
@@ -198,6 +218,7 @@ class Index extends Component {
         <Card>
           <Search
             row={4}
+            searchLoading={pageLoading}
             getSearchValue={this.eventSearchValue}
             options={[
               { key: '1', id: 'id', type: 'input', name: 'id' },
@@ -213,7 +234,7 @@ class Index extends Component {
           <Row>
             <Button onClick={() => this.setState({ visible: true })} type='primary'>新建</Button>
             <span style={{ padding: 5 }}/>
-            <Button onClick={() => this.serviceBatchDelete(undefined)}
+            <Button loading={batchDeleteLoading} onClick={() => this.serviceBatchDelete(undefined)}
                     style={{ display: this.state.selectedRowKeys.length !== 0 ? 'inline-block' : 'none' }}>批量删除这{this.state.selectedRowKeys.length}条</Button>
           </Row>
           <Row style={{ marginTop: 5, minHeight: '100%' }}>

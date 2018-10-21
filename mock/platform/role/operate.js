@@ -1,4 +1,6 @@
 import { delay } from 'roadhog-api-doc';
+import loginErrorInfo from '../util/loginErrorInfo';
+
 
 const jsonData = {
   "result": {
@@ -12,16 +14,52 @@ const jsonData = {
 
 const Api = {
   'POST /platform/role/add': (req, res) => {
-    res.send(JSON.stringify(jsonData))
+    const { platform_token } = req.headers;
+
+    if (platform_token && platform_token !== 'null') {
+      res.send(JSON.stringify(jsonData));
+    } else {
+      const loginErrorInfoValue = loginErrorInfo();
+      res.send(JSON.stringify(loginErrorInfoValue));
+    }
   },
+
+
   'POST /platform/role/update': (req, res) => {
-    res.send(JSON.stringify(jsonData))
+    const { platform_token } = req.headers;
+
+    if (platform_token && platform_token !== 'null') {
+      res.send(JSON.stringify(jsonData));
+    } else {
+      const loginErrorInfoValue = loginErrorInfo();
+      res.send(JSON.stringify(loginErrorInfoValue));
+    }
   },
+
+
   'POST /platform/role/delete': (req, res) => {
-    res.send(JSON.stringify(jsonData))
+    const { platform_token } = req.headers;
+
+    if (platform_token && platform_token !== 'null') {
+      res.send(JSON.stringify(jsonData));
+    } else {
+      const loginErrorInfoValue = loginErrorInfo();
+      res.send(JSON.stringify(loginErrorInfoValue));
+    }
   },
+
+
   'POST /platform/role/batch-delete': (req, res) => {
-    res.send(JSON.stringify(jsonData))
+    const { platform_token } = req.headers;
+
+    if (platform_token && platform_token !== 'null') {
+      res.send(JSON.stringify(jsonData));
+    } else {
+      const loginErrorInfoValue = loginErrorInfo();
+      res.send(JSON.stringify(loginErrorInfoValue));
+    }
+
+
   },
 };
 export default delay(Api,500)

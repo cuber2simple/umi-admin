@@ -1,4 +1,5 @@
 import { delay } from 'roadhog-api-doc';
+import loginErrorInfo from './util/loginErrorInfo';
 
 const jsonData = {
   "result": [
@@ -28,7 +29,15 @@ const jsonData = {
 
 const Api = {
   'POST /platform/menu/list': (req, res) => {
-    res.end(JSON.stringify(jsonData));
+    const { platform_token } = req.headers;
+
+    if (platform_token && platform_token !== 'null') {
+      res.send(JSON.stringify(jsonData));
+    } else {
+      const loginErrorInfoValue = loginErrorInfo();
+      res.send(JSON.stringify(loginErrorInfoValue));
+    }
+
   },
 };
 
