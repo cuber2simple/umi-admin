@@ -2,6 +2,7 @@ import axios from 'axios';
 import { message } from 'antd';
 import router from 'umi/router';
 import api from './api';
+import { platformToken } from '../common/globalConstant';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -33,10 +34,10 @@ axios.interceptors.request.use(config => {
     ...config,
     headers: {
       post: {
-        platform_token: sessionStorage.getItem('platform_token'),
+        platform_token: sessionStorage.getItem(platformToken),
       },
       get: {
-        platform_token: sessionStorage.getItem('platform_token'),
+        platform_token: sessionStorage.getItem(platformToken),
       },
     },
   };

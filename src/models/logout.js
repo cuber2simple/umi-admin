@@ -1,6 +1,7 @@
 import request from '../request/request';
 import router from 'umi/router';
 import { message } from 'antd';
+import { platformToken } from '../common/globalConstant';
 
 async function logout(params) {
   return request.post(request.api.platformLogout, params);
@@ -15,7 +16,7 @@ export default {
     * platformLogout({ payload }, { call }) {
       const response = yield call(logout, payload);
       if (response && response.is_success === true) {
-        sessionStorage.removeItem('platform_token');
+        sessionStorage.removeItem(platformToken);
         router.push('/login');
       } else {
         message.error(response.error_info.msg);
