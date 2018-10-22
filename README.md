@@ -6,8 +6,8 @@
 - 但是：**前端基础知识该学还是要学，这个项目更多作用也只是一个模板和说明书的作用，你要大改，自身要够硬。**
 - 为了方便模拟一些测试，代码里面加了一些随机数，所以可能同一个操作不时结果是不一样的，比如登录。
 - umi 框架算是 2018 年开始发力的，所以说现在更新很频繁，可能有些小 bug 我也还没遇到，但是大家后续可以多关注下 umi 官方。
-- 最主要前端组件：
-  - [umi@2.0.0-0](https://umijs.org/zh/guide/) -- 可插拔的企业级 React 应用框架，蚂蚁金服的底层前端框架
+- 最主要前端组件（以 package.json 为主）：
+  - [umi@2.1.2](https://umijs.org/zh/guide/) -- 可插拔的企业级 React 应用框架，蚂蚁金服的底层前端框架
   - [react@16.5.2](https://github.com/facebook/react) -- React 基础库（umi 已经集成）
   - [react-dom@16.5.2](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom) -- React 路由包（umi 已经集成）
   - [react-router@4.3.1](https://github.com/ReactTraining/react-router) -- React 路由包（umi 已经集成）
