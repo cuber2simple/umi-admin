@@ -28,7 +28,7 @@ const jsonData = {
       'icon': 'line-chart',
       'children': [
         {
-          'name': '图表',
+          'name': '柱状图',
           'path': '/charts',
           'icon': null,
           'children': null,

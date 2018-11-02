@@ -94,7 +94,7 @@ class Index extends Component {
     return (
       <Fragment>
         <Card style={{ margin: 30, textAlign: 'center' }}>
-          <h1>antV 图表展示</h1>
+          <h1>antV 柱状图展示</h1>
         </Card>
         <div style={{ margin: 30 }}>
           <Row
@@ -218,13 +218,14 @@ class Index extends Component {
             </Col>
             <Col span={12}>
               <Card>
-                <h2>横向基础柱状体</h2>
+                <h2>横向基础柱状体(数据太多的话横向很丑)</h2>
                 <h3><span style={{ color: 'red' }}>nodeId</span> : 图表容器第id,唯一键不能出现相同</h3>
                 <h3><span style={{ color: 'red' }}>data</span> : 图表数据</h3>
                 <h3><span style={{ color: 'red' }}>height</span> : 图表高度,可根据宽度自己调整</h3>
                 <h3><span style={{ color: 'red' }}>title</span> : 图表标题</h3>
                 <h3><span style={{ color: 'red' }}>scale</span> : y轴坐标刻度间隔</h3>
                 <h3><span style={{ color: 'red' }}>axis</span> : x和y轴对应data的字段</h3>
+                <h3><span style={{ color: 'red' }}>transpose</span> : transpose等于true时,横向显示图表</h3>
               </Card>
             </Col>
           </Row>
