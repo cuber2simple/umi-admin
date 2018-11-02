@@ -22,6 +22,19 @@ const jsonData = {
         },
       ],
     },
+    {
+      'name': 'antV图表',
+      'path': null,
+      'icon': 'line-chart',
+      'children': [
+        {
+          'name': '图表',
+          'path': '/charts',
+          'icon': null,
+          'children': null,
+        },
+      ],
+    },
   ],
   'error_info': null,
   'is_success': true,

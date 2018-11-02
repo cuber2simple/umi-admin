@@ -87,7 +87,7 @@ class BasicLayout extends Component {
     const { props, global: { openKeys, selectedKeys, collapsed }, logoutLoding } = this.props;
     return (
       <Spin spinning={!!logoutLoding} tip={'退出系统中,请稍等!'}>
-        <Layout style={{ height: '100vh' }}>
+        <Layout style={{ minHeight: '100vh' }}>
           <Sider
             width={256}
             collapsed={collapsed}
@@ -111,7 +111,7 @@ class BasicLayout extends Component {
               />
               <UserMenu props={this.props}/>
             </Header>
-            <Content>
+            <Content >
               <RouterTabs/>
               {props.children}
             </Content>
