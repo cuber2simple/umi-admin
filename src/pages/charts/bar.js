@@ -3,7 +3,7 @@ import { Card, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
 import { Bar } from '../../component/AntV';
 
-class Index extends Component {
+class BarChart extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -305,6 +305,6 @@ class Index extends Component {
   }
 }
 
-Index.propTypes = {};
+BarChart.propTypes = {};
 
-export default Index;
+export default BarChart;

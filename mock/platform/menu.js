@@ -29,7 +29,19 @@ const jsonData = {
       'children': [
         {
           'name': '柱状图',
-          'path': '/charts',
+          'path': '/charts/bar',
+          'icon': null,
+          'children': null,
+        },
+        {
+          'name': '饼状图',
+          'path': '/charts/pie',
+          'icon': null,
+          'children': null,
+        },
+        {
+          'name': '折线图',
+          'path': '/charts/line',
           'icon': null,
           'children': null,
         },
