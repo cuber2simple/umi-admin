@@ -47,6 +47,12 @@ const jsonData = {
         },
       ],
     },
+    {
+      'name': '权限管理',
+      'path': '/right',
+      'icon': 'setting',
+      'children': null,
+    },
   ],
   'error_info': null,
   'is_success': true,

@@ -21,4 +21,7 @@ export default {
   platformLogin: '/platform/login',
   platformLogout: '/platform/logout',
 
+  // 获取全部权限
+  allAuthority: '/platform/authority/allAuthority',
+
 };
