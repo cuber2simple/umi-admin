@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Card, Row, Col } from 'antd';
 import PropTypes from 'prop-types';
-import Pie from './../../component/AntV/Pie';
+import { Pie } from './../../component/AntV';
 
 class PieCharts extends Component {
   constructor(props) {

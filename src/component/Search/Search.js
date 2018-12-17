@@ -17,7 +17,6 @@ class HehTable extends Component {
     };
   }
 
-
   submit = (e) => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -61,17 +60,24 @@ class HehTable extends Component {
   expand = () => {
     this.setState({ expand: !this.state.expand });
   };
-
-  hehInput = (layout, item, index, disabled, defaultValue) => {
+  JudgeWidth = () => {
     const width = document.body.clientWidth;
-    const { form } = this.props;
-    const row = this.props.row === 3;
-    const showLength = row ? 3 : 4;
+    if(width >= 1600) return 'xxl';
+    if(width >= 1200) return 'xl';
+    if(width >= 768) return 'md';
+    return 'xs';
+  };
+  hehInput = (layout, item, index, disabled, defaultValue) => {
+    const sizeGrade = { xs: 1, md: 2, xl: 3, xxl: 4 };
+    const size = sizeGrade[this.JudgeWidth()];
     return (
       <Col
-        span={width <= 768 ? 24 : row ? 8 : 6}
+        xs={24}
+        md={12}
+        xl={8}
+        xxl={6}
         key={item.key}
-        style={{ display: index + 1 > showLength && this.state.expand !== true ? 'none' : 'block' }}
+        style={{ display: this.state.expand ? 'inline-block' : index + 1 > size ? 'none' : 'inline-block' }}
       >
         <ItemInput
           id={item.id}
@@ -85,15 +91,16 @@ class HehTable extends Component {
     );
   };
   hehSelect = (layout, item, index, disabled, defaultValue) => {
-    const width = document.body.clientWidth;
-    const { getFieldDecorator } = this.props.form;
-    const row = this.props.row === 3;
-    const showLength = row ? 3 : 4;
+    const sizeGrade = { xs: 1, md: 2, xl: 3, xxl: 4 };
+    const size = sizeGrade[this.JudgeWidth()];
     return (
       <Col
-        span={width <= 768 ? 24 : row ? 8 : 6}
+        xs={24}
+        md={12}
+        xl={8}
+        xxl={6}
         key={item.key}
-        style={{ display: index + 1 > showLength && this.state.expand !== true ? 'none' : 'block' }}
+        style={{ display: this.state.expand ? 'inline-block' : index + 1 > size ? 'none' : 'inline-block' }}
       >
         <ItemSelect
           id={item.id}
@@ -109,15 +116,17 @@ class HehTable extends Component {
     );
   };
   hehData = (layout, item, index) => {
-    const width = document.body.clientWidth;
+    const sizeGrade = { xs: 1, md: 2, xl: 3, xxl: 4 };
+    const size = sizeGrade[this.JudgeWidth()];
     const { getFieldDecorator } = this.props.form;
-    const row = this.props.row === 3;
-    const showLength = row ? 3 : 4;
     return (
       <Col
-        span={width <= 768 ? 24 : row ? 8 : 6}
+        xs={24}
+        xl={8}
+        md={12}
+        xxl={6}
         key={item.key}
-        style={{ display: index + 1 > showLength && this.state.expand !== true ? 'none' : 'block' }}
+        style={{ display: this.state.expand ? 'inline-block' : index + 1 > size ? 'none' : 'inline-block' }}
       >
         <FormItem
           {...layout}
@@ -133,15 +142,17 @@ class HehTable extends Component {
     );
   };
   hehRangeData = (layout, item, index) => {
-    const width = document.body.clientWidth;
+    const sizeGrade = { xs: 1, md: 2, xl: 3, xxl: 4 };
+    const size = sizeGrade[this.JudgeWidth()];
     const { getFieldDecorator } = this.props.form;
-    const row = this.props.row === 3;
-    const showLength = row ? 3 : 4;
     return (
       <Col
-        span={width <= 768 ? 24 : row ? 8 : 6}
+        xs={24}
+        xl={8}
+        md={12}
+        xxl={6}
         key={item.key}
-        style={{ display: index + 1 > showLength && this.state.expand !== true ? 'none' : 'block' }}
+        style={{ display: this.state.expand ? 'inline-block' : index + 1 > size ? 'none' : 'inline-block' }}
       >
         <FormItem
           {...layout}
@@ -158,12 +169,14 @@ class HehTable extends Component {
   };
 
   render() {
-    const { options, row, searchLoading } = this.props;
+    const { options, searchLoading } = this.props;
     const { expand } = this.state;
     const layout = {
-      labelCol: { sm: { span: 10 }, xl: { span: 8 }, xxl: { span: 6 } },
+      labelCol: { sm: { span: 6 }, xl: { span: 6 }, xxl: { span: 6 } },
       wrapperCol: { sm: { span: 14 }, xl: { span: 16 }, xxl: { span: 16 } },
     };
+    const sizeGrade = { xs: 1, md: 2, xl: 3, xxl: 4 };
+    const size = sizeGrade[this.JudgeWidth()];
     return (
       <Row>
         <Form onSubmit={this.submit}>
@@ -173,14 +186,14 @@ class HehTable extends Component {
               options && options.map((item, index) => {
                 return (
                   item.type === 'input' ?
-                    this.hehInput(layout, item, index)
-                    : item.type === 'select' ?
-                    this.hehSelect(layout, item, index)
-                    : item.type === 'date' ?
-                      this.hehData(layout, item, index)
-                      : item.type === 'rangeDate' ?
-                        this.hehRangeData(layout, item, index)
-                        : ''
+                  this.hehInput(layout, item, index)
+                  : item.type === 'select' ?
+                  this.hehSelect(layout, item, index)
+                  : item.type === 'date' ?
+                  this.hehData(layout, item, index)
+                  : item.type === 'rangeDate' ?
+                  this.hehRangeData(layout, item, index)
+                  : ''
                 );
               })
             }
@@ -196,7 +209,7 @@ class HehTable extends Component {
               <Button
                 onClick={this.expand}
                 icon={!expand ? 'down' : 'up'}
-                style={{ display: row === 3 && options.length > 3 ? 'inline-block' : row === 4 && options.length > 4 ? 'inline-block' : 'none' }}
+                style={{ display: options.length > size ? 'inline-block' : 'none' }}
               >
                 {
                   !expand ? '展开所有' : '收起所有'
