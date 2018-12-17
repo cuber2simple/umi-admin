@@ -222,8 +222,9 @@ class Index extends Component {
             getSearchValue={this.eventSearchValue}
             options={[
               { key: '1', id: 'id', type: 'input', name: 'id' },
-              { key: '2', id: 'role_name', type: 'input', name: '角色名称' },
-              { key: '4', id: 'create_date', type: 'rangeDate', name: '创建时间', format: 'YYYY-MM-DD' },
+              { key: '2', id: 'role_name', type: 'select', name: '角色名称', options: [{key:'admin',value:'管理员'},{key:'ordinary',value:'普通人员'}]},
+              { key: '3', id: 'create_date', type: 'rangeDate', name: '创建时间', format: 'YYYY-MM-DD' },
+              { key: '4', id: 'birthday_date', type: 'date', name: '生日', format: 'YYYY-MM-DD' },
             ]}
           />
         </Card>
