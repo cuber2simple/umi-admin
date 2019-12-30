@@ -18,7 +18,7 @@ export default {
   platformRoleBatchDelete: '/platform/role/batch-delete',
 
 
-  platformLogin: '/platform/login',
+  platformLogin: '/backend/ums/token/login',
   platformLogout: '/platform/logout',
 
   // 获取全部权限

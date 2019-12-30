@@ -28,17 +28,17 @@ class Index extends Component {
 
 
   eventSubmit = () => {
-    const username = _.trim(this.refs.username.value);
+    const user_name = _.trim(this.refs.user_name.value);
     const password = _.trim(this.refs.password.value);
     const { dispatch } = this.props;
-    if (username === '') {
+    if (user_name === '') {
       message.error('用户名不能为空!');
     } else if (password === '') {
       message.error('密码不能为空!');
     } else {
       dispatch({
         type: modelPlatformLogin,
-        payload: { username, password },
+        payload: { user_name, password },
       });
     }
   };
@@ -60,7 +60,7 @@ class Index extends Component {
             <img src={avatar}/>
           </div>
           <form>
-            <input ref='username' type="text" className={styles['text']} placeholder={'username'} defaultValue='admin'/>
+            <input ref='user_name' type="text" className={styles['text']} placeholder={'user_name'} defaultValue='admin'/>
             <input ref='password' type="password" placeholder={'password'} defaultValue='123456'/>
           </form>
           <div className={styles['signin']}>

@@ -20,9 +20,14 @@ export default {
   ],
   proxy: {
     "/api": {
-      "target": "http://localhost:8001",
+      "target": "http://localhost:8002",
       "changeOrigin": true,
       "pathRewrite": { "^/api" : "" }
+    },
+    "/backend": {
+      "target": "http://localhost:8080",
+      "changeOrigin": true,
+      "pathRewrite": { "^/backend" : "" }
     }
   },
 }
