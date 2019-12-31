@@ -10,11 +10,11 @@ export default {
   effects: {
     * platformLogin({ payload }, { call }) {
       const response = yield call(login, payload);
-      if (response && response['resp_code'] === success_code) {
+      if (response && response[resp_code] === success_code) {
         const token = response.data.accessToken;
         sessionStorage.setItem(platformToken, token);
         router.push('/');
-      } else if (response && response['resp_code'] != success_code) {
+      } else if (response && response[resp_code] != success_code) {
         message.error(response['resp_msg']);
       }
     },

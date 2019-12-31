@@ -93,7 +93,7 @@ class BasicLayout extends Component {
             collapsed={collapsed}
             collapsedWidth="0"
           >
-            <div className={styles.logo}><h2>heh</h2></div>
+            <div className={styles.logo}><h2>管理系统</h2></div>
             <SideBar
               collapsed={this.state.collapsed}
               onSelect={this.onSelect}
