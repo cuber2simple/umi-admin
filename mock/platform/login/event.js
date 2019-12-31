@@ -1,30 +1,26 @@
 import { delay } from 'roadhog-api-doc';
 
 const Api = {
-  'POST /platform/login': (req, res) => {
+  'POST /ums/token/login': (req, res) => {
 
-    const { username, password } = req.body;
+    const { user_name, password } = req.body;
 
     const randomValue = parseInt(Math.random() * 100, 10);
 
-    if (username === 'admin' && password === '123456' && randomValue > 5) {
+    if (user_name === 'admin' && password === '123456' && randomValue > 5) {
       res.send(JSON.stringify({
-        'error_info': null,
-        'result': {
-          'token': 'cd534924c12561de4eb948531a7fdeb9',
+        'resp_code': '0000',
+        'data': {
+          'accessToken': 'cd534924c12561de4eb948531a7fdeb9',
         },
-        'is_success': true,
+        'resp_msg': '登陆成功',
       }));
 
     } else {
       res.send(JSON.stringify({
-        'error_info': {
-          'code': 401,
-          'msg': '用户名或密码不正确',
-          'date': 1536739520111,
-        },
+        'resp_msg': '登陆失败',
         'result': null,
-        'is_success': false,
+        'resp_code': '0001',
       }));
     }
 
